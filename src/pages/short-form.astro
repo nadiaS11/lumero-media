@@ -1,0 +1,66 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+
+const body = [
+  'Short-form is not "small video". It is the most unforgiving format in the industry — three seconds to earn the next thirty, every cut interrogated by the algorithm and the thumb. We treat it that way.',
+  'Every project starts with the hook. We open from the most arresting frame, layer pace under the dialogue, and keep the caption work tight enough that you can watch the cut twice and read it both times. Music, sound design, and SFX are mixed for tinny phone speakers and good headphones at once.',
+  'We deliver platform-native masters for TikTok, Reels, and Shorts, with safe-area awareness for each. No upscaled landscape edits with letterboxing.',
+];
+
+const process = [
+  { num: '01', title: 'Hook', copy: 'We screen all your footage and pull the strongest first three seconds. The hook drives the rest of the cut, not the other way around.' },
+  { num: '02', title: 'Pace', copy: 'Cut to the beat of the speaker, then break the beat to keep the eye honest. We never coast — every second has a job.' },
+  { num: '03', title: 'Caption', copy: 'Burned-in captions in a brand-consistent style, plus a clean SRT for accessibility and edits. Punctuation that reads at speed.' },
+  { num: '04', title: 'Deliver', copy: 'Platform-ready masters for TikTok, Reels, and Shorts with the right aspect, framerate, and bitrate. Sound mixed for phones.' },
+];
+
+const deliverables = [
+  'Vertical 9:16 master in client-specified codec (typically H.264, 60fps where source allows)',
+  'Burned-in captions plus a clean SRT sidecar file',
+  'Platform-ready cuts trimmed to each platform’s ideal duration (TikTok / Reels / Shorts)',
+  'Thumbnail concept (optional, +1 round of revisions)',
+  'Typical first-cut turnaround: 3–5 business days for a single deliverable; same-week for retainer clients',
+];
+
+const faqs = [
+  { q: 'Do you work from raw footage or finished cuts?', a: 'Both. We are most useful when given raw footage and a brief — that’s where the editing decisions actually matter — but we will polish a rough cut if that’s what the project needs.' },
+  { q: 'How many hooks do you test?', a: 'For a single deliverable, we send one cut with one hook. For paid-ad work or retainer clients, we typically produce 3–5 hook variants from the same edit for A/B testing.' },
+  { q: 'Can you handle captioning in multiple languages?', a: 'Yes. We deliver burned-in captions in the primary language and provide SRTs in any additional languages you specify, sourced via human translation, not auto-translate.' },
+  { q: 'Do you provide stock music or do we?', a: 'Either. We have Epidemic Sound and Artlist licenses for client projects. If you have a brand sonic library or a sync deal, we work from that.' },
+  { q: 'What’s the minimum engagement?', a: 'One-offs are welcome. Most short-form clients move to a 4-per-month retainer after the first month because the per-cut cost drops meaningfully.' },
+  { q: 'Do you cut for paid ads?', a: 'Yes — we treat ad cuts differently from organic. Ad creative gets multiple hook variants, multiple CTA placements, and we keep the iteration cycle to under 48 hours.' },
+  { q: 'Do you offer thumbnails?', a: 'For Shorts and Reels, yes. We treat thumbnails as part of the hook system, not a decorative add-on.' },
+];
+---
+<ServiceLayout
+  service="short-form"
+  title="Short-form — Lumero Media"
+  description="Vertical 9:16 short-form video editing for creators and brands. Hook-first cuts for TikTok, Reels, and Shorts."
+  caption="01 · Vertical 9:16 · TikTok / Reels / Shorts"
+  headline="Short-form that earns the scroll-stop."
+  subline="Hook-driven editing for creators and brands who treat the first three seconds as the whole game."
+  body={body}
+  process={process}
+  deliverables={deliverables}
+  faqs={faqs}
+  ctaLabel="Start a short-form project →"
+>
+  <!-- Hero asset: phone frame loop -->
+  <div slot="hero-asset" class="grid md:grid-cols-12 gap-6 items-center">
+    <div class="md:col-span-5 md:col-start-1">
+      <div class="relative mx-auto w-full max-w-[320px] aspect-[9/19.5] rounded-[28px] border border-[var(--border-strong)] bg-black overflow-hidden shadow-[0_30px_120px_-30px_rgba(245,181,68,0.25)]">
+        <div class="absolute inset-x-0 top-0 h-6 bg-black z-10"></div>
+        <video
+          src="/reels/short-form-hero.mp4"
+          poster="/posters/short-form-hero.jpg"
+          muted autoplay loop playsinline preload="metadata"
+          class="absolute inset-0 w-full h-full object-cover"
+        ></video>
+      </div>
+    </div>
+    <div class="md:col-span-6 md:col-start-7">
+      <p class="mono mb-4">Live preview</p>
+      <p class="body-lg max-w-md">A real short on loop. The frame is 9:16. The safe area is honored. The first second does the work.</p>
+    </div>
+  </div>
+</ServiceLayout>

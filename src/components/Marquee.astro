@@ -1,0 +1,22 @@
+---
+interface Props { items: string[]; caption?: string }
+const { items, caption } = Astro.props;
+const doubled = [...items, ...items];
+---
+<section class="py-20 border-y border-[var(--border)] overflow-hidden">
+  {caption && <p class="mono container-l mb-8">{caption}</p>}
+  <div
+    x-data="{}"
+    class="marquee relative w-full"
+    @mouseenter="$el.querySelector('.marquee-track').style.animationPlayState='paused'"
+    @mouseleave="$el.querySelector('.marquee-track').style.animationPlayState='running'"
+  >
+    <div class="marquee-track flex gap-16 w-max whitespace-nowrap">
+      {doubled.map((name) => (
+        <span class="font-display text-3xl md:text-5xl text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+          {name}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

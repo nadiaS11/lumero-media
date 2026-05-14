@@ -1,0 +1,27 @@
+---
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<span
+  x-data="{
+    f: 0, s: 0, m: 0, h: 0, raf: null,
+    pad(n) { return String(n).padStart(2, '0') },
+    start() {
+      const t0 = performance.now();
+      const tick = (now) => {
+        const elapsed = (now - t0) / 1000;
+        this.h = Math.floor(elapsed / 3600);
+        this.m = Math.floor((elapsed % 3600) / 60);
+        this.s = Math.floor(elapsed % 60);
+        this.f = Math.floor((elapsed * 24) % 24);
+        this.raf = requestAnimationFrame(tick);
+      };
+      this.raf = requestAnimationFrame(tick);
+    }
+  }"
+  x-init="start()"
+  class:list={["font-mono text-xs tracking-widest text-[var(--text-secondary)]", cls]}
+  aria-label="Session timecode"
+>
+  <span x-text="pad(h)+':'+pad(m)+':'+pad(s)+':'+pad(f)">00:00:00:00</span>
+</span>

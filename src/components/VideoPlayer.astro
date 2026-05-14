@@ -1,0 +1,62 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+  caption?: string;
+}
+const { src, poster, caption } = Astro.props;
+---
+<figure
+  x-data="{
+    playing: false,
+    muted: true,
+    progress: 0,
+    duration: 0,
+    fmt(t) { if (!isFinite(t)) return '00:00'; const m = Math.floor(t/60); const s = Math.floor(t%60); return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); },
+    toggle() { const v = $refs.v; if (v.paused) { v.play(); this.playing = true; } else { v.pause(); this.playing = false; } },
+    seek(e) { const v = $refs.v; const rect = $refs.bar.getBoundingClientRect(); const pct = (e.clientX - rect.left) / rect.width; v.currentTime = pct * v.duration; },
+    fullscreen() { const v = $refs.v; if (v.requestFullscreen) v.requestFullscreen(); }
+  }"
+  class="relative w-full bg-black overflow-hidden rounded-[2px]"
+>
+  <video
+    x-ref="v"
+    src={src}
+    poster={poster}
+    playsinline
+    preload="metadata"
+    class="w-full h-auto block"
+    @loadedmetadata="duration = $event.target.duration"
+    @timeupdate="progress = ($event.target.currentTime / $event.target.duration) * 100"
+    @ended="playing = false"
+    @click="toggle()"
+  ></video>
+
+  <!-- Controls -->
+  <div class="absolute inset-x-0 bottom-0 p-4 md:p-6 bg-gradient-to-t from-black/70 to-transparent">
+    <div
+      x-ref="bar"
+      @click="seek($event)"
+      class="h-px w-full bg-[var(--border-strong)] cursor-pointer mb-4 group"
+      role="slider" aria-label="Scrubber"
+    >
+      <div class="h-px bg-[var(--accent)]" :style="`width: ${progress}%`"></div>
+    </div>
+    <div class="flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <button @click="toggle()" :aria-label="playing ? 'Pause' : 'Play'" class="mono link-underline">
+          <span x-text="playing ? '❚❚ Pause' : '▶ Play'"></span>
+        </button>
+        <button @click="muted = !muted; $refs.v.muted = muted" :aria-label="muted ? 'Unmute' : 'Mute'" class="mono link-underline">
+          <span x-text="muted ? 'Muted' : 'Sound'"></span>
+        </button>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="mono"><span x-text="fmt($refs.v ? $refs.v.currentTime : 0)"></span> / <span x-text="fmt(duration)"></span></span>
+        <button @click="fullscreen()" aria-label="Fullscreen" class="mono link-underline">⤢</button>
+      </div>
+    </div>
+  </div>
+
+  {caption && <figcaption class="mono mt-3">{caption}</figcaption>}
+</figure>

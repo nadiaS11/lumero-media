@@ -1,0 +1,66 @@
+---
+import Timecode from './Timecode.astro';
+const year = new Date().getFullYear();
+---
+<footer id="contact" class="border-t border-[var(--border)] mt-32">
+  <div class="container-l pt-24 md:pt-32 pb-16">
+    <!-- Row 1: editorial CTA -->
+    <div class="grid md:grid-cols-12 gap-6 items-end pb-20 md:pb-32">
+      <div class="md:col-span-9">
+        <p class="mono mb-8">Get in touch</p>
+        <h2 class="display-hero leading-[0.95]">
+          Have something<br/>worth cutting?
+        </h2>
+      </div>
+      <div class="md:col-span-3">
+        <a
+          href="mailto:medialumero@gmail.com"
+          class="link-underline text-[var(--accent)] font-mono text-sm tracking-widest uppercase"
+        >
+          medialumero@gmail.com →
+        </a>
+      </div>
+    </div>
+
+    <!-- Row 2: columns -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-16 border-t border-[var(--border)] pt-12">
+      <div>
+        <p class="mono mb-4">Services</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/short-form" class="link-underline">Short-form</a></li>
+          <li><a href="/long-form" class="link-underline">Long-form</a></li>
+          <li><a href="/faceless" class="link-underline">Faceless</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono mb-4">Elsewhere</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="link-underline">Instagram</a></li>
+          <li><a href="#" class="link-underline">YouTube</a></li>
+          <li><a href="#" class="link-underline">Vimeo</a></li>
+          <li><a href="#" class="link-underline">LinkedIn</a></li>
+          <li><a href="#" class="link-underline">X</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono mb-4">Studio</p>
+        <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+          <li>Based in Bangladesh</li>
+          <li>Working worldwide</li>
+          <li>Replies within 24h</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono mb-4">Contact</p>
+        <a href="mailto:medialumero@gmail.com" class="text-sm link-underline">medialumero@gmail.com</a>
+      </div>
+    </div>
+
+    <!-- Row 3: meta -->
+    <div class="hairline mb-6"></div>
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      <p class="mono">© {year} Lumero Media · All work © respective clients</p>
+      <Timecode />
+    </div>
+  </div>
+</footer>

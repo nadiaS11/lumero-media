@@ -1,0 +1,57 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+
+const body = [
+  'Long-form is a runtime contract. When a viewer commits ten, twenty, sixty minutes, the edit owes them shape — an opening that earns the wait, a middle that does not sag, and an ending that lands. We cut for that contract.',
+  'Our long-form pipeline is film-school assembly followed by story pass, then a proper color and sound finish. We are comfortable in DaVinci Resolve for color and Pro Tools for sound; we are equally comfortable handing off to a colorist or mixer you already trust.',
+  'Brand films, documentaries, podcast episodes, YouTube long-form. The format changes; the discipline does not.',
+];
+
+const process = [
+  { num: '01', title: 'Assembly', copy: 'A full chronological assembly of every shot worth keeping. This is the slowest step, intentionally — it is where the film actually gets made.' },
+  { num: '02', title: 'Story', copy: 'Restructure for tension, rhythm, and clarity. Trim ruthlessly. Cards or graphics introduced here, not later.' },
+  { num: '03', title: 'Color', copy: 'Primary balance, then a creative grade. Skin tones honored, blacks honest, highlights protected. Calibrated reference monitor or nothing.' },
+  { num: '04', title: 'Sound', copy: 'Dialogue cleanup, full music and SFX mix, and a stereo or 5.1 master to broadcast loudness standards.' },
+  { num: '05', title: 'Master', copy: 'Deliverables in your spec — ProRes 422 HQ, H.264 web masters, social cutdowns, sub-titles, captions. One revision round in master, hard cap.' },
+];
+
+const deliverables = [
+  'Master file in client-specified codec (ProRes 422 HQ default for broadcast, H.264 for web)',
+  'Color-graded passes with reference frames and shot-by-shot CDL/Resolve project files',
+  'Full sound mix to -23 LUFS broadcast or -14 LUFS streaming, your call',
+  'Optional social cutdowns (vertical and square) from the long-form master',
+  'Typical turnaround: 2–4 weeks per finished long-form piece depending on runtime and source volume',
+];
+
+const faqs = [
+  { q: 'Do you handle color and sound in-house?', a: 'Yes. Color in DaVinci Resolve, sound in Pro Tools / Logic. We can also hand off if you have a preferred colorist or mixer; the timeline and project files travel cleanly.' },
+  { q: 'Will you work with our DP / director directly?', a: 'Always preferred. The best long-form work happens when the editor is in the conversation early, not handed a hard drive at wrap.' },
+  { q: 'What footage formats do you accept?', a: 'Anything modern — ProRes, BRAW, R3D, Sony XAVC, MP4. We transcode to editing proxies and conform back for online and color.' },
+  { q: 'Can you handle archival and stock licensing?', a: 'We source and place archival footage, but the licensing paperwork is on the client side. We supply the usage notes the licensor needs.' },
+  { q: 'Do you write or rewrite voiceover scripts?', a: 'For docs and brand films we provide script edits and pacing notes. We do not ghostwrite from scratch.' },
+  { q: 'What about subtitles and captions?', a: 'Included for the master in your primary language. Additional languages are quoted per project.' },
+  { q: 'Can you cut a podcast video?', a: 'Yes — multi-cam podcast video edits are a regular part of the long-form pipeline. Includes b-roll cutaways and chapter markers.' },
+];
+---
+<ServiceLayout
+  service="long-form"
+  title="Long-form — Lumero Media"
+  description="Long-form video editing, color, and sound for brand films, documentaries, podcasts, and YouTube."
+  caption="02 · Widescreen 16:9 · Brand films / Documentaries / Podcasts"
+  headline="Long-form that respects the runtime."
+  subline="Story-driven cuts with proper color and sound finishing. We owe the viewer shape — opening, middle, ending — and we deliver it."
+  body={body}
+  process={process}
+  deliverables={deliverables}
+  faqs={faqs}
+  ctaLabel="Start a long-form project →"
+>
+  <div slot="hero-asset">
+    <div class="relative w-full aspect-[2.39/1] overflow-hidden rounded-[2px] bg-[var(--surface)]">
+      <img src="/posters/long-form-hero.jpg" alt="Cinematic still — long-form sample" class="absolute inset-0 w-full h-full object-cover" />
+      <div class="absolute inset-x-0 bottom-0 p-6 md:p-10 bg-gradient-to-t from-black/70 to-transparent">
+        <p class="mono">Still · 2.39:1 · ProRes 422 HQ master</p>
+      </div>
+    </div>
+  </div>
+</ServiceLayout>

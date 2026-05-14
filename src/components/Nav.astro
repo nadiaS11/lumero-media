@@ -1,0 +1,38 @@
+---
+import MobileMenu from './MobileMenu.astro';
+const path = Astro.url.pathname;
+const link = (href: string, label: string) => ({ href, label, active: path === href || (href !== '/' && path.startsWith(href)) });
+const links = [
+  link('/short-form', 'Short-form'),
+  link('/long-form', 'Long-form'),
+  link('/faceless', 'Faceless'),
+  link('/#work', 'Work'),
+  link('/#contact', 'Contact'),
+];
+---
+<header
+  x-data="{ scrolled: false }"
+  x-init="scrolled = window.scrollY > 8; window.addEventListener('scroll', () => scrolled = window.scrollY > 8, { passive: true })"
+  :class="scrolled ? 'border-b border-[var(--border)] bg-[color-mix(in_oklab,var(--bg)_85%,transparent)] backdrop-blur-md' : 'border-b border-transparent'"
+  class="fixed inset-x-0 top-0 z-50 transition-colors duration-200"
+>
+  <nav class="container-l flex items-center justify-between h-16 md:h-20">
+    <a href="/" class="font-display text-xl md:text-2xl tracking-tight" transition:name="wordmark">
+      Lumero
+    </a>
+    <ul class="hidden md:flex items-center gap-8">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class:list={["mono link-underline relative", l.active && 'text-[var(--accent)]']}
+          >
+            {l.label}
+            {l.active && <span class="absolute -bottom-1 left-0 right-0 h-px bg-[var(--accent)]"></span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <MobileMenu links={links} />
+  </nav>
+</header>

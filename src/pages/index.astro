@@ -1,0 +1,394 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import VideoPlayer from '../components/VideoPlayer.astro';
+import Marquee from '../components/Marquee.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const featured = works.filter((w) => w.data.featured);
+const grid = works.slice(0, 8);
+
+const services = [
+  { slug: '/short-form', label: 'Short-form', mono: '01 · VERTICAL 9:16', desc: 'TikTok, Reels, Shorts. Hook-driven cuts that earn the scroll-stop.', tags: ['Hook', 'Pace', 'Captions'] },
+  { slug: '/long-form', label: 'Long-form', mono: '02 · WIDESCREEN 16:9', desc: 'YouTube long-form, brand films, documentaries, podcasts. Story, color, and sound that respect the runtime.', tags: ['Story', 'Color', 'Sound'] },
+  { slug: '/faceless', label: 'Faceless', mono: '03 · FACELESS YOUTUBE', desc: 'High-volume faceless content actually edited — B-roll, motion, kinetic type — built to read as premium.', tags: ['B-roll', 'Motion', 'Type'] },
+];
+
+const clients = ['Northwind', 'Atlas Daily', 'Vela', 'Meridian Films', 'Halcyon', 'Greylight', 'Compass & Co.', 'Riverbend Studios'];
+
+const process = [
+  { num: '01', title: 'Brief', copy: 'Tight intake call. We pin the audience, the format, the tone, and the deliverables before a single clip lands on the timeline.' },
+  { num: '02', title: 'Edit', copy: 'First assembly within days. We send a private review link with frame-accurate comment threading. You stay in the loop.' },
+  { num: '03', title: 'Refine', copy: 'Two rounds of revisions included. Color, sound, captions, masters. We deliver in whatever spec your destination needs.' },
+];
+
+const altHeadlines = [
+  'A studio for films, shorts, and the cuts in between.',
+  'Edit, color, sound — finished where it should be.',
+];
+---
+<BaseLayout intro={true} title="Lumero Media — Post-production studio">
+
+  <!-- HERO -->
+  <section class="hero relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-center px-6 pt-32 pb-40">
+    <!-- Background starfield -->
+    <div class="starfield" aria-hidden="true">
+      {Array.from({ length: 60 }).map((_, i) => {
+        const x = (i * 37.317) % 100;        // deterministic pseudo-random
+        const y = (i * 73.491 + 13) % 100;
+        const size = (i % 7 === 0) ? 2.4 : (i % 3 === 0 ? 1.7 : 1.1);
+        const delay = ((i * 0.27) % 5).toFixed(2);
+        const dur = 3 + ((i * 0.41) % 3);
+        return (
+          <span
+            class="star"
+            style={`left: ${x}%; top: ${y}%; width: ${size}px; height: ${size}px; animation-delay: ${delay}s; animation-duration: ${dur}s`}
+          ></span>
+        );
+      })}
+    </div>
+
+    <!-- Headlines -->
+    <h1 class="relative z-10 max-w-5xl" x-data="{ shown: false }" x-intersect.once="shown = true">
+      <span class="block overflow-hidden">
+        <span
+          class="block font-sans font-semibold text-white tracking-tight transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
+          style="font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1.05; letter-spacing: -0.02em;"
+          :class="shown ? 'translate-y-0' : 'translate-y-full'"
+        >
+          From messy to catchy. In 72 hours.
+        </span>
+      </span>
+      <span class="block overflow-hidden mt-3 md:mt-4">
+        <span
+          class="block font-display italic text-[var(--accent)] transition-transform duration-700 delay-150 ease-[cubic-bezier(0.65,0,0.35,1)]"
+          style="font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1.0; letter-spacing: -0.03em;"
+          :class="shown ? 'translate-y-0' : 'translate-y-full'"
+        >
+          You shoot. We cut. The internet erupts.
+        </span>
+      </span>
+    </h1>
+
+    <!-- Subheading -->
+    <p
+      class="relative z-10 body-lg max-w-xl mt-10 text-[var(--text-secondary)]"
+      x-data="{ shown: false }"
+      x-intersect.once="shown = true"
+      :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
+      style="transition: all 600ms 300ms var(--ease-cinematic)"
+    >
+      A boutique post-production studio for creators and brands who refuse to ship sloppy. Real editors, real craft, weekend-proof turnarounds.
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4"
+      x-data="{ shown: false }"
+      x-intersect.once="shown = true"
+      :class="shown ? 'opacity-100' : 'opacity-0'"
+      style="transition: opacity 600ms 450ms var(--ease-cinematic)"
+    >
+      <a
+        href="mailto:medialumero@gmail.com?subject=Book%20a%20call"
+        class="btn-primary"
+      >
+        Book a call
+      </a>
+      <a href="#work" class="btn-secondary">See work</a>
+    </div>
+
+    <!-- Crescent moon — round disc with offset mask cutout, opening to the right. -->
+    <div class="moon-wrap " aria-hidden="true">
+      <svg class="moon-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="moonGrad" cx="35%" cy="35%" r="75%">
+            <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="1" />
+            <stop offset="35%"  stop-color="#EAF1FF" stop-opacity="0.95" />
+            <stop offset="75%"  stop-color="#B8D0FF" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="#6FA4FF" stop-opacity="0.15" />
+          </radialGradient>
+          <filter id="moonBlur" x="-5%" y="-5%" width="110%" height="110%">
+            <feGaussianBlur stdDeviation="0.4" />
+          </filter>
+          <mask id="crescentMask">
+            <rect width="200" height="200" fill="white" />
+            <circle cx="124" cy="92" r="70" fill="black" />
+          </mask>
+        </defs>
+        <circle
+          cx="100" cy="100" r="78"
+          fill="url(#moonGrad)"
+          mask="url(#crescentMask)"
+          filter="url(#moonBlur)"
+        />
+      </svg>
+      <div class="moon-glow"></div>
+      <!-- Sparkles along the outer crescent edge (left-facing arc) -->
+      {Array.from({ length: 18 }).map((_, i) => {
+        const t = i / 17;
+        // Arc from top horn (~ 130°) sweeping left/down to bottom horn (~ 230°), in SVG coords.
+        const angle = (130 + t * 100) * Math.PI / 180;
+        const cx = 50;            // wrap % = svg cx 100/200
+        const cy = 50;            // wrap % = svg cy 100/200
+        const r  = 39;            // wrap % ≈ svg r 78/200
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        const delay = (i * 0.18).toFixed(2);
+        const size = i % 4 === 0 ? 3 : i % 2 === 0 ? 2 : 1.5;
+        return (
+          <span
+            class="sparkle"
+            style={`left: ${x}%; top: ${y}%; width: ${size}px; height: ${size}px; animation-delay: ${delay}s`}
+          ></span>
+        );
+      })}
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      background:
+        radial-gradient(ellipse at 50% 80%, rgba(80, 130, 220, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 20%, rgba(40, 70, 140, 0.12) 0%, transparent 60%),
+        var(--bg);
+      isolation: isolate;
+    }
+    .starfield {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 6px rgba(220, 235, 255, 0.85);
+      opacity: 0.6;
+      animation: twinkle-star 4s ease-in-out infinite;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes twinkle-star {
+      0%, 100% { opacity: 0.25; transform: translate(-50%, -50%) scale(0.85); }
+      50%      { opacity: 0.95; transform: translate(-50%, -50%) scale(1.15); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .star { animation: none; opacity: 0.55; }
+    }
+
+    /* Buttons */
+    :global(.btn-primary) {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--moonlight);
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      transition: transform 200ms var(--ease-cinematic), box-shadow 200ms var(--ease-cinematic), filter 200ms var(--ease-cinematic);
+      box-shadow: 0 10px 30px -10px rgba(180, 210, 255, 0.5);
+    }
+    :global(.btn-primary:hover) {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 40px -10px rgba(180, 210, 255, 0.75);
+    }
+    :global(.btn-secondary) {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface);
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      transition: background 200ms var(--ease-cinematic), border-color 200ms var(--ease-cinematic);
+    }
+    :global(.btn-secondary:hover) {
+      background: var(--surface-hover);
+      border-color: var(--accent);
+    }
+
+    /* Round crescent moon — sits below the CTAs, horns pointing up, cradling the buttons. */
+    .moon-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 38%) rotate(-90deg);
+      width: min(120vw, 1100px);
+      aspect-ratio: 1 / 1;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+    @media (min-width: 768px) {
+      .moon-wrap {
+        width: min(85vw, 1400px);
+        transform: translate(-50%, 34%) rotate(-90deg);
+      }
+    }
+    .moon-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 0 30px rgba(180, 210, 255, 0.55))
+              drop-shadow(0 0 80px rgba(120, 165, 240, 0.4));
+    }
+    .moon-glow {
+      position: absolute;
+      inset: -10%;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(180, 210, 255, 0.28) 0%, rgba(120, 165, 240, 0.12) 35%, transparent 65%);
+      filter: blur(40px);
+      z-index: -1;
+    }
+
+    /* Sparkles / stars — moonlight white with cool blue halo */
+    .sparkle {
+      position: absolute;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 8px 1px rgba(225, 235, 255, 0.9), 0 0 18px 3px rgba(140, 180, 255, 0.55);
+      opacity: 0;
+      animation: twinkle 3.6s ease-in-out infinite;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+      40%      { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      60%      { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sparkle { animation: none; opacity: 0.7; }
+    }
+  </style>
+
+  <!-- ALT HEADLINES (placeholders for swap) -->
+  <!-- // PLACEHOLDER: alt hero headlines -->
+  <!--
+    {altHeadlines.map(...)}
+  -->
+
+  <!-- SERVICES PREVIEW -->
+  <section class="container-l py-32 md:py-40">
+    <div class="flex items-baseline justify-between mb-16">
+      <p class="mono">What we do</p>
+      <p class="mono opacity-60">Three services</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {services.map((s) => (
+        <a
+          href={s.slug}
+          x-data="{ hovering: false }"
+          @mouseenter="hovering = true"
+          @mouseleave="hovering = false"
+          class="group relative block min-h-[60vh] lg:min-h-[80vh] rounded-[2px] border border-[var(--border)] overflow-hidden bg-[var(--bg-elevated)]"
+        >
+          <video
+            x-ref="v"
+            x-effect="hovering ? $refs.v?.play() : $refs.v?.pause()"
+            muted loop playsinline preload="none"
+            class="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-500"
+            :class="hovering ? 'opacity-70' : 'opacity-40'"
+            poster={`/posters/${s.label.toLowerCase().replace(' ','-')}.jpg`}
+          >
+            <source src={`/reels/${s.label.toLowerCase().replace(' ','-')}.mp4`} type="video/mp4" />
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div class="relative h-full flex flex-col justify-between p-6 md:p-10">
+            <p class="mono">{s.mono}</p>
+            <div>
+              <h3 class="display-h1 mb-4">{s.label}</h3>
+              <p class="body-lg max-w-md mb-8">{s.desc}</p>
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  {s.tags.map((t) => <span class="btn-pill">{t}</span>)}
+                </div>
+                <span class="mono group-hover:text-[var(--accent)] transition">View service →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section id="work" class="container-l py-32 md:py-40">
+    <div class="flex items-baseline justify-between mb-16">
+      <h2 class="display-h1">Selected work</h2>
+      <p class="mono">2022 — Present</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-[minmax(180px,auto)] gap-6">
+      {grid.map((w, i) => {
+        const spans = ['lg', 'md', 'tall', 'wide', 'md', 'sm', 'md', 'lg'];
+        return <WorkCard work={w} span={spans[i % spans.length]} />;
+      })}
+    </div>
+    <div class="mt-12">
+      <a href="#" class="mono link-underline">View all work →</a>
+    </div>
+  </section>
+
+  <!-- REEL -->
+  <section class="container-l py-32 md:py-40">
+    <div class="flex items-baseline justify-between mb-10">
+      <h2 class="display-h1">Lumero Reel — 2026</h2>
+      <p class="mono">Runtime · 02:14</p>
+    </div>
+    <VideoPlayer src="/reels/lumero-reel-2026.mp4" poster="/posters/reel-2026.jpg" caption="// PLACEHOLDER: replace with current reel master" />
+  </section>
+
+  <!-- CLIENTS -->
+  <Marquee items={clients} caption="Trusted by · 2022 – Present" />
+
+  <!-- PROCESS -->
+  <section class="container-l py-32 md:py-40">
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-4">
+        <p class="mono mb-4">How we work</p>
+        <h2 class="display-h1">Three steps,<br/>no theatre.</h2>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-x-8 gap-y-12">
+      {process.map((s) => (
+        <div class="border-t border-[var(--border)] pt-8">
+          <p class="mono text-[var(--accent)] mb-6">{s.num}</p>
+          <h3 class="display-h2 mb-4">{s.title}</h3>
+          <p class="text-[var(--text-secondary)] leading-relaxed">{s.copy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (placeholder) -->
+  <section class="container-l py-32 md:py-40">
+    <p class="mono mb-16">Words</p>
+    <div class="space-y-24">
+      {[
+        { q: 'They cut our brand film like it was theirs. The pacing decisions alone were worth the engagement.', name: 'Iris Halberstam', role: 'Director, Northwind Studios', mark: '“' },
+        { q: 'Three months of weekly faceless drops, never a missed beat. The B-roll work is sharper than the channels three times their size.', name: 'Daniel Okafor', role: 'Founder, Atlas Daily', mark: '“' },
+        { q: 'Our retention curve went from a cliff to a slope. Whatever they did in the first eight seconds — keep doing that.', name: 'Mei Tanaka', role: 'Head of Content, Greylight', mark: '“' },
+      ].map((t) => (
+        <figure class="relative max-w-4xl">
+          <span aria-hidden="true" class="absolute -top-12 -left-4 font-display text-[12rem] leading-none text-[var(--accent-soft)] pointer-events-none select-none">{t.mark}</span>
+          <blockquote class="relative font-display text-2xl md:text-4xl leading-tight tracking-tight">
+            {t.q}
+          </blockquote>
+          <figcaption class="mono mt-6">— {t.name} · {t.role} <span class="opacity-50">// PLACEHOLDER</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="container-l py-32 md:py-48 text-center">
+    <h2 class="display-hero">Ready when you are.</h2>
+    <a href="mailto:medialumero@gmail.com" class="mono link-underline text-[var(--accent)] mt-12 inline-block">medialumero@gmail.com →</a>
+  </section>
+</BaseLayout>
