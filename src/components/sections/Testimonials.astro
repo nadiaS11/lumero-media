@@ -10,10 +10,10 @@ const { label = 'Words', items } = Astro.props;
   <div class="space-y-24">
     {items.map((t) => (
       <figure class="relative max-w-4xl">
-        <span aria-hidden="true" class="absolute -top-12 -left-4 font-display text-[12rem] leading-none text-accent-soft pointer-events-none select-none">
+        <span aria-hidden="true" class="absolute -top-12 -left-4 font-manrope  text-[12rem] leading-none text-accent-soft pointer-events-none select-none">
           {t.mark ?? '“'}
         </span>
-        <blockquote class="relative font-display text-2xl md:text-4xl leading-tight tracking-tight">
+        <blockquote class="relative font-manrope  text-2xl md:text-4xl leading-tight tracking-tight">
           {t.q}
         </blockquote>
         <figcaption class="mono mt-6">— {t.name} · {t.role}</figcaption>

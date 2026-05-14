@@ -11,7 +11,7 @@ const { items } = Astro.props;
         aria-controls={`faq-${i}`}
         class="w-full text-left py-6 flex items-baseline justify-between gap-6 group"
       >
-        <span class="font-display text-xl md:text-2xl pr-4">{item.q}</span>
+        <span class="font-manrope  text-xl md:text-2xl pr-4">{item.q}</span>
         <span class="mono shrink-0" :class={`open === ${i} ? 'text-accent' : ''`}>
           <span x-text={`open === ${i} ? '—' : '+'`}>+</span>
         </span>

@@ -21,25 +21,9 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Instrument Serif",
-      cssVariable: "--astro-font-instrument",
-      weights: ["400"],
-      styles: ["normal", "italic"],
-      subsets: ["latin"],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "Inter Tight",
-      cssVariable: "--astro-font-inter-tight",
-      weights: ["400", "500", "600", "700"],
-      styles: ["normal"],
-      subsets: ["latin"],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "JetBrains Mono",
-      cssVariable: "--astro-font-jetbrains",
-      weights: ["400", "500"],
+      name: "Manrope",
+      cssVariable: "--astro-font-manrope",
+      weights: ["400", "500", "600", "700", "800"],
       styles: ["normal"],
       subsets: ["latin"],
     },

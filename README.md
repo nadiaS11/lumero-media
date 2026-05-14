@@ -56,7 +56,7 @@ pnpm preview
 1. Replace placeholder reels in `/public/reels/` with real masters (hero ≤ 2 MB, VP9 `.webm` + H.264 `.mp4`, poster always set).
 2. Drop poster JPGs in `/public/posters/` for every reel referenced.
 3. Swap testimonials on the homepage with real ones (search `// PLACEHOLDER`).
-4. Self-host Fraunces / Inter / JetBrains Mono in `/public/fonts/` and replace the Google Fonts `<link>` in `BaseLayout.astro` with `@font-face` rules + `font-display: swap`. Preload the critical weights.
+4. Self-host Fraunces / Inter / JetBrains Mono in `/public/fonts/` and replace the Google Fonts `<link>` in `BaseLayout.astro` with `@font-face` rules + `font-manrope: swap`. Preload the critical weights.
 5. Generate `og-default.jpg` (1200×630) and per-case-study OG images.
 6. Configure a deploy adapter (Vercel / Netlify / Cloudflare) and a contact-form backend if email-only is not enough.
 7. Add analytics (Plausible or Umami — script in `BaseLayout.astro`).
