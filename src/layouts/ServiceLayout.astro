@@ -1,8 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import FAQ from '../components/FAQ.astro';
-import WorkCard from '../components/WorkCard.astro';
-import { getCollection } from 'astro:content';
+import ServicePageHero from '../components/sections/ServicePageHero.astro';
+import HeroAsset from '../components/sections/HeroAsset.astro';
+import IntroBody from '../components/sections/IntroBody.astro';
+import Process from '../components/sections/Process.astro';
+import Deliverables from '../components/sections/Deliverables.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
 
 interface Props {
   service: 'short-form' | 'long-form' | 'faceless';
@@ -19,93 +23,17 @@ interface Props {
 }
 
 const {
-  service, caption, headline, subline, body, process, deliverables, faqs, ctaLabel, title, description,
+  caption, headline, subline, body, process, deliverables, faqs, ctaLabel, title, description,
 } = Astro.props;
-
-const all = await getCollection('work', (e) => e.data.service === service);
-const works = all.sort((a, b) => a.data.order - b.data.order).slice(0, 6);
 ---
 <BaseLayout title={title} description={description}>
-  <!-- Hero -->
-  <section class="container-l pt-32 md:pt-40 pb-24 md:pb-32">
-    <p class="mono mb-8">{caption}</p>
-    <h1 class="display-h1 max-w-5xl">{headline}</h1>
-    {subline && <p class="body-lg mt-8 max-w-2xl">{subline}</p>}
-    <div class="mt-12 hairline"></div>
-  </section>
-
-  <!-- Hero asset slot -->
-  <section class="container-l pb-24 md:pb-32">
+  <ServicePageHero caption={caption} headline={headline} subline={subline} />
+  <HeroAsset>
     <slot name="hero-asset" />
-  </section>
-
-  <!-- What we do -->
-  <section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
-    <div class="md:col-span-3">
-      <p class="mono">What we do</p>
-    </div>
-    <div class="md:col-span-8 md:col-start-5 space-y-6">
-      {body.map((p) => <p class="body-lg">{p}</p>)}
-    </div>
-  </section>
-
-  <!-- Recent work -->
-  {works.length > 0 && (
-    <section class="container-l pb-24 md:pb-32">
-      <div class="flex items-baseline justify-between mb-12">
-        <h2 class="display-h2">Recent work</h2>
-        <a href="/" class="mono link-underline">All work →</a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {works.map((w) => <WorkCard work={w} />)}
-      </div>
-    </section>
-  )}
-
-  <!-- Process -->
-  <section class="container-l pb-24 md:pb-32">
-    <p class="mono mb-12">Process</p>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-      {process.map((s) => (
-        <div>
-          <p class="mono text-accent mb-4">{s.num}</p>
-          <h3 class="display-h2 mb-3">{s.title}</h3>
-          <p class="text-fg-muted leading-relaxed">{s.copy}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Deliverables -->
-  <section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
-    <div class="md:col-span-3">
-      <p class="mono">Deliverables &amp; turnaround</p>
-    </div>
-    <ul class="md:col-span-8 md:col-start-5 space-y-4">
-      {deliverables.map((d) => (
-        <li class="flex gap-4 py-3 border-b border-border">
-          <span class="mono text-accent mt-1">→</span>
-          <span class="text-fg">{d}</span>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  <!-- FAQ -->
-  <section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
-    <div class="md:col-span-3">
-      <p class="mono">FAQ</p>
-    </div>
-    <div class="md:col-span-8 md:col-start-5">
-      <FAQ items={faqs} />
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="container-l pb-32">
-    <div class="border-t border-border pt-12 flex flex-col md:flex-row md:items-baseline md:justify-between gap-6">
-      <h2 class="display-h1">{ctaLabel}</h2>
-      <a href="mailto:medialumero@gmail.com" class="mono link-underline text-accent">medialumero@gmail.com →</a>
-    </div>
-  </section>
+  </HeroAsset>
+  <IntroBody paragraphs={body} />
+  <Process items={process} variant="wide" />
+  <Deliverables items={deliverables} />
+  <FaqSection items={faqs} />
+  <FinalCta variant="row" heading={ctaLabel} />
 </BaseLayout>

@@ -1,0 +1,20 @@
+---
+import VideoPlayer from '../VideoPlayer.astro';
+
+interface Props {
+  id?: string;
+  heading: string;
+  meta?: string;
+  src: string;
+  poster: string;
+  caption?: string;
+}
+const { id, heading, meta, src, poster, caption } = Astro.props;
+---
+<section id={id} class="container-l py-32 md:py-40">
+  <div class="flex items-baseline justify-between mb-10">
+    <h2 class="display-h1">{heading}</h2>
+    {meta && <p class="mono">{meta}</p>}
+  </div>
+  <VideoPlayer src={src} poster={poster} caption={caption} />
+</section>

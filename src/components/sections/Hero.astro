@@ -1,0 +1,199 @@
+---
+// Home hero — starfield background, crescent moon that rises on scroll, headline + CTAs.
+---
+<section class="hero relative min-h-screen flex flex-col items-center justify-center overflow-hidden text-center px-6 pt-32 pb-40">
+  <!-- Background starfield -->
+  <div class="starfield" aria-hidden="true">
+    {Array.from({ length: 60 }).map((_, i) => {
+      const x = (i * 37.317) % 100;
+      const y = (i * 73.491 + 13) % 100;
+      const size = (i % 7 === 0) ? 2.4 : (i % 3 === 0 ? 1.7 : 1.1);
+      const delay = ((i * 0.27) % 5).toFixed(2);
+      const dur = 3 + ((i * 0.41) % 3);
+      return (
+        <span
+          class="star"
+          style={`left: ${x}%; top: ${y}%; width: ${size}px; height: ${size}px; animation-delay: ${delay}s; animation-duration: ${dur}s`}
+        ></span>
+      );
+    })}
+  </div>
+
+  <!-- Headlines -->
+  <h1 class="relative z-10 max-w-5xl" x-data="{ shown: false }" x-intersect.once="shown = true">
+    <span class="block overflow-hidden">
+      <span
+        class="block font-sans font-semibold text-white text-hero transition-transform duration-700 ease-cinematic"
+        :class="shown ? 'translate-y-0' : 'translate-y-full'"
+      >
+        From messy to catchy. In 72 hours.
+      </span>
+    </span>
+    <span class="block overflow-hidden mt-3 md:mt-4">
+      <span
+        class="block font-display italic text-accent text-hero transition-transform duration-700 delay-150 ease-cinematic"
+        :class="shown ? 'translate-y-0' : 'translate-y-full'"
+      >
+        You shoot. We cut. <br /> The internet erupts.
+      </span>
+    </span>
+  </h1>
+
+  <p
+    class="relative z-10 body-lg max-w-xl mt-10 text-fg-muted"
+    x-data="{ shown: false }"
+    x-intersect.once="shown = true"
+    :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
+    style="transition: all 600ms 300ms var(--ease-cinematic)"
+  >
+    A boutique post-production studio for creators and brands who refuse to ship sloppy. Real editors, real craft, weekend-proof turnarounds.
+  </p>
+
+  <div
+    class="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4"
+    x-data="{ shown: false }"
+    x-intersect.once="shown = true"
+    :class="shown ? 'opacity-100' : 'opacity-0'"
+    style="transition: opacity 600ms 450ms var(--ease-cinematic)"
+  >
+    <a href="mailto:medialumero@gmail.com?subject=Book%20a%20call" class="btn-primary">Book a call</a>
+    <a href="#work" class="btn-secondary">See work</a>
+  </div>
+
+  <!-- Crescent moon — round disc with offset mask cutout, rotated so horns point up. -->
+  <div class="moon-wrap" aria-hidden="true">
+    <svg class="moon-svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="moonGrad" cx="35%" cy="35%" r="75%">
+          <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="1" />
+          <stop offset="35%"  stop-color="#EAF1FF" stop-opacity="0.95" />
+          <stop offset="75%"  stop-color="#B8D0FF" stop-opacity="0.55" />
+          <stop offset="100%" stop-color="#6FA4FF" stop-opacity="0.15" />
+        </radialGradient>
+        <filter id="moonBlur" x="-5%" y="-5%" width="110%" height="110%">
+          <feGaussianBlur stdDeviation="0.4" />
+        </filter>
+        <mask id="crescentMask">
+          <rect width="200" height="200" fill="white" />
+          <circle cx="115" cy="95" r="74" fill="black" />
+        </mask>
+      </defs>
+      <circle cx="100" cy="100" r="78" fill="url(#moonGrad)" mask="url(#crescentMask)" filter="url(#moonBlur)" />
+    </svg>
+    <div class="moon-glow"></div>
+    {Array.from({ length: 18 }).map((_, i) => {
+      const t = i / 17;
+      const angle = (130 + t * 100) * Math.PI / 180;
+      const cx = 50, cy = 50, r = 39;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      const delay = (i * 0.18).toFixed(2);
+      const size = i % 4 === 0 ? 3 : i % 2 === 0 ? 2 : 1.5;
+      return (
+        <span
+          class="sparkle"
+          style={`left: ${x}%; top: ${y}%; width: ${size}px; height: ${size}px; animation-delay: ${delay}s`}
+        ></span>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(ellipse at 50% 80%, rgba(80, 130, 220, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 20%, rgba(40, 70, 140, 0.12) 0%, transparent 60%),
+      var(--bg);
+    isolation: isolate;
+  }
+  .starfield { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 6px rgba(220, 235, 255, 0.85);
+    opacity: 0.6;
+    animation: twinkle-star 4s ease-in-out infinite;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes twinkle-star {
+    0%, 100% { opacity: 0.25; transform: translate(-50%, -50%) scale(0.85); }
+    50%      { opacity: 0.95; transform: translate(-50%, -50%) scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .star { animation: none; opacity: 0.55; }
+  }
+
+  /* Round crescent moon — sits below the CTAs, horns pointing up. */
+  @property --moon-y {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 28%;
+  }
+  .moon-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    --moon-y: 28%;
+    transform: translate(-50%, var(--moon-y)) rotate(-90deg);
+    width: min(120vw, 1100px);
+    aspect-ratio: 1 / 1;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+  @media (min-width: 768px) {
+    .moon-wrap {
+      width: min(85vw, 1400px);
+      --moon-y: 24%;
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    .moon-wrap {
+      animation: moon-rise linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+    @keyframes moon-rise {
+      to { --moon-y: -18%; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .moon-wrap { animation: none; }
+  }
+  .moon-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 0 30px rgba(180, 210, 255, 0.55))
+            drop-shadow(0 0 80px rgba(120, 165, 240, 0.4));
+  }
+  .moon-glow {
+    position: absolute;
+    inset: -10%;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(180, 210, 255, 0.28) 0%, rgba(120, 165, 240, 0.12) 35%, transparent 65%);
+    filter: blur(40px);
+    z-index: -1;
+  }
+  .sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 8px 1px rgba(225, 235, 255, 0.9), 0 0 18px 3px rgba(140, 180, 255, 0.55);
+    opacity: 0;
+    animation: twinkle 3.6s ease-in-out infinite;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+    40%      { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    60%      { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sparkle { animation: none; opacity: 0.7; }
+  }
+</style>

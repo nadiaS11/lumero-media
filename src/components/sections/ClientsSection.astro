@@ -1,0 +1,10 @@
+---
+import Marquee from '../Marquee.astro';
+
+interface Props {
+  items: string[];
+  caption?: string;
+}
+const { items, caption } = Astro.props;
+---
+<Marquee items={items} caption={caption} />

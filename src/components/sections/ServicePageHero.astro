@@ -1,0 +1,14 @@
+---
+interface Props {
+  caption: string;
+  headline: string;
+  subline?: string;
+}
+const { caption, headline, subline } = Astro.props;
+---
+<section class="container-l pt-32 md:pt-40 pb-24 md:pb-32">
+  <p class="mono mb-8">{caption}</p>
+  <h1 class="display-h1 max-w-5xl">{headline}</h1>
+  {subline && <p class="body-lg mt-8 max-w-2xl">{subline}</p>}
+  <div class="mt-12 hairline"></div>
+</section>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  label?: string;
+  paragraphs: string[];
+}
+const { label = 'What we do', paragraphs } = Astro.props;
+---
+<section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
+  <div class="md:col-span-3">
+    <p class="mono">{label}</p>
+  </div>
+  <div class="md:col-span-8 md:col-start-5 space-y-6">
+    {paragraphs.map((p) => <p class="body-lg">{p}</p>)}
+  </div>
+</section>

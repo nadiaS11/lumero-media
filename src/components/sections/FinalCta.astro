@@ -1,0 +1,24 @@
+---
+interface Props {
+  heading: string;
+  email?: string;
+  /** "centered" = home (large heading above email link), "row" = service pages (heading + link in a row, top hairline). */
+  variant?: 'centered' | 'row';
+}
+const { heading, email = 'medialumero@gmail.com', variant = 'centered' } = Astro.props;
+---
+{variant === 'centered' ? (
+  <section class="container-l py-32 md:py-48 text-center">
+    <h2 class="display-hero">{heading}</h2>
+    <a href={`mailto:${email}`} class="mono link-underline text-accent mt-12 inline-block">
+      {email} →
+    </a>
+  </section>
+) : (
+  <section class="container-l pb-32">
+    <div class="border-t border-border pt-12 flex flex-col md:flex-row md:items-baseline md:justify-between gap-6">
+      <h2 class="display-h1">{heading}</h2>
+      <a href={`mailto:${email}`} class="mono link-underline text-accent">{email} →</a>
+    </div>
+  </section>
+)}

@@ -1,0 +1,20 @@
+---
+interface Props {
+  label?: string;
+  items: string[];
+}
+const { label = 'Deliverables & turnaround', items } = Astro.props;
+---
+<section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
+  <div class="md:col-span-3">
+    <p class="mono">{label}</p>
+  </div>
+  <ul class="md:col-span-8 md:col-start-5 space-y-4">
+    {items.map((d) => (
+      <li class="flex gap-4 py-3 border-b border-border">
+        <span class="mono text-accent mt-1">→</span>
+        <span class="text-fg">{d}</span>
+      </li>
+    ))}
+  </ul>
+</section>

@@ -1,0 +1,17 @@
+---
+import FAQ from '../FAQ.astro';
+
+interface Props {
+  label?: string;
+  items: { q: string; a: string }[];
+}
+const { label = 'FAQ', items } = Astro.props;
+---
+<section class="container-l pb-24 md:pb-32 grid md:grid-cols-12 gap-8">
+  <div class="md:col-span-3">
+    <p class="mono">{label}</p>
+  </div>
+  <div class="md:col-span-8 md:col-start-5">
+    <FAQ items={items} />
+  </div>
+</section>
