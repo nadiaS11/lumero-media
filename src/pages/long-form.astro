@@ -1,10 +1,16 @@
 ---
 import ServiceLayout from '../layouts/ServiceLayout.astro';
+import long01 from '@/assets/long-form/long-01.mp4';
+import showReel from '@/assets/long-form/show-reel.mp4';
+
+const films = [
+  { src: showReel, label: 'Show reel', meta: '16:9 · multi-project' },
+  { src: long01, label: 'Brand film', meta: '2.39:1 · ProRes master' },
+];
 
 const body = [
-  'Long-form is a runtime contract. When a viewer commits ten, twenty, sixty minutes, the edit owes them shape — an opening that earns the wait, a middle that does not sag, and an ending that lands. We cut for that contract.',
-  'Our long-form pipeline is film-school assembly followed by story pass, then a proper color and sound finish. We are comfortable in DaVinci Resolve for color and Pro Tools for sound; we are equally comfortable handing off to a colorist or mixer you already trust.',
-  'Brand films, documentaries, podcast episodes, YouTube long-form. The format changes; the discipline does not.',
+  'A runtime contract. An opening that earns the wait, a middle that does not sag, an ending that lands.',
+  'Film-school assembly, story pass, then a proper color and sound finish. Brand films, documentaries, podcasts, YouTube long-form.',
 ];
 
 const process = [
@@ -47,11 +53,25 @@ const faqs = [
   ctaLabel="Start a long-form project →"
 >
   <div slot="hero-asset">
-    <div class="relative w-full aspect-[2.39/1] overflow-hidden rounded-[2px] bg-surface">
-      <img src="/posters/long-form-hero.jpg" alt="Cinematic still — long-form sample" class="absolute inset-0 w-full h-full object-cover" />
-      <div class="absolute inset-x-0 bottom-0 p-6 md:p-10 bg-gradient-to-t from-black/70 to-transparent">
-        <p class="mono">Still · 2.39:1 · ProRes 422 HQ master</p>
-      </div>
+    <div class="flex items-center justify-between mb-6">
+      <p class="mono">Selected work · {films.length} pieces</p>
+      <p class="mono opacity-60">16:9 / 2.39:1</p>
+    </div>
+    <div class="space-y-6 md:space-y-8">
+      {films.map((f, i) => (
+        <div class={`relative w-full overflow-hidden rounded-[2px] bg-surface border border-border ${i === 0 ? 'aspect-video' : 'aspect-[2.39/1]'}`}>
+          <video
+            src={f.src}
+            playsinline controls preload="metadata"
+            controlslist="nodownload"
+            class="absolute inset-0 w-full h-full object-cover"
+          ></video>
+          <div class="pointer-events-none absolute inset-x-0 top-0 p-4 md:p-6 bg-gradient-to-b from-black/60 to-transparent flex items-center justify-between">
+            <p class="mono">{f.label}</p>
+            <p class="mono opacity-70">{f.meta}</p>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </ServiceLayout>

@@ -8,10 +8,16 @@ import Process from '../components/sections/Process.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import FinalCta from '../components/sections/FinalCta.astro';
 
+// Videos — imported so Vite fingerprints and serves them; source files live in /assets and are gitignored.
+import shortFormCard from '@/assets/reels/reel-01.mp4';
+import longFormCard from '@/assets/long-form/long-01.mp4';
+import facelessCard from '@/assets/long-form/talking-head-01.mp4';
+import showReel from '@/assets/long-form/show-reel.mp4';
+
 const services = [
-  { slug: '/short-form', label: 'Short-form', mono: '01 · VERTICAL 9:16', desc: 'TikTok, Reels, Shorts. Hook-driven cuts that earn the scroll-stop.', tags: ['Hook', 'Pace', 'Captions'] },
-  { slug: '/long-form', label: 'Long-form', mono: '02 · WIDESCREEN 16:9', desc: 'YouTube long-form, brand films, documentaries, podcasts. Story, color, and sound that respect the runtime.', tags: ['Story', 'Color', 'Sound'] },
-  { slug: '/faceless', label: 'Faceless', mono: '03 · FACELESS YOUTUBE', desc: 'High-volume faceless content actually edited — B-roll, motion, kinetic type — built to read as premium.', tags: ['B-roll', 'Motion', 'Type'] },
+  { slug: '/short-form', label: 'Short-form', mono: '01 · VERTICAL 9:16', desc: 'TikTok, Reels, Shorts. Hook-driven cuts that earn the scroll-stop.', tags: ['Hook', 'Pace', 'Captions'], video: shortFormCard },
+  { slug: '/long-form', label: 'Long-form', mono: '02 · WIDESCREEN 16:9', desc: 'YouTube long-form, brand films, documentaries, podcasts. Story, color, and sound that respect the runtime.', tags: ['Story', 'Color', 'Sound'], video: longFormCard },
+  { slug: '/faceless', label: 'Faceless', mono: '03 · FACELESS YOUTUBE', desc: 'High-volume faceless content actually edited — B-roll, motion, kinetic type — built to read as premium.', tags: ['B-roll', 'Motion', 'Type'], video: facelessCard },
 ];
 
 const clients = ['Northwind', 'Atlas Daily', 'Vela', 'Meridian Films', 'Halcyon', 'Greylight', 'Compass & Co.', 'Riverbend Studios'];
@@ -35,9 +41,7 @@ const testimonials = [
     id="work"
     heading="Lumero Reel — 2026"
     meta="Runtime · 02:14"
-    src="/reels/lumero-reel-2026.mp4"
-    poster="/posters/reel-2026.jpg"
-    caption="// PLACEHOLDER: replace with current reel master"
+    src={showReel}
   />
   <ClientsSection items={clients} caption="Trusted by · 2022 – Present" />
   <Process

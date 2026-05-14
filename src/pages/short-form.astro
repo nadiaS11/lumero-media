@@ -1,10 +1,19 @@
 ---
 import ServiceLayout from '../layouts/ServiceLayout.astro';
+import reel01 from '@/assets/reels/reel-01.mp4';
+import reel02 from '@/assets/reels/reel-02.mp4';
+import reel03 from '@/assets/reels/reel-03.mp4';
+import reel04 from '@/assets/reels/reel-04.mp4';
+import reel05 from '@/assets/reels/reel-05.mp4';
+import reel06 from '@/assets/reels/reel-06.mp4';
+import reel07 from '@/assets/reels/reel-07.mp4';
+import reel08 from '@/assets/reels/reel-08.mp4';
+
+const reels = [reel01, reel02, reel03, reel04, reel05, reel06, reel07, reel08];
 
 const body = [
-  'Short-form is not "small video". It is the most unforgiving format in the industry — three seconds to earn the next thirty, every cut interrogated by the algorithm and the thumb. We treat it that way.',
-  'Every project starts with the hook. We open from the most arresting frame, layer pace under the dialogue, and keep the caption work tight enough that you can watch the cut twice and read it both times. Music, sound design, and SFX are mixed for tinny phone speakers and good headphones at once.',
-  'We deliver platform-native masters for TikTok, Reels, and Shorts, with safe-area awareness for each. No upscaled landscape edits with letterboxing.',
+  'Three seconds to earn the next thirty. Hook-first cuts, tight captions, mixed for phone speakers and headphones at once.',
+  'Platform-native masters for TikTok, Reels, and Shorts — no letterboxed landscape edits.',
 ];
 
 const process = [
@@ -45,22 +54,22 @@ const faqs = [
   faqs={faqs}
   ctaLabel="Start a short-form project →"
 >
-  <!-- Hero asset: phone frame loop -->
-  <div slot="hero-asset" class="grid md:grid-cols-12 gap-6 items-center">
-    <div class="md:col-span-5 md:col-start-1">
-      <div class="relative mx-auto w-full max-w-[320px] aspect-[9/19.5] rounded-[28px] border border-border-strong bg-black overflow-hidden shadow-[0_30px_120px_-30px_rgba(245,181,68,0.25)]">
-        <div class="absolute inset-x-0 top-0 h-6 bg-black z-10"></div>
-        <video
-          src="/reels/short-form-hero.mp4"
-          poster="/posters/short-form-hero.jpg"
-          muted autoplay loop playsinline preload="metadata"
-          class="absolute inset-0 w-full h-full object-cover"
-        ></video>
-      </div>
+  <div slot="hero-asset">
+    <div class="flex items-center justify-between mb-6">
+      <p class="mono">Selected work · {reels.length} reels</p>
+      <p class="mono opacity-60">9:16 · loop</p>
     </div>
-    <div class="md:col-span-6 md:col-start-7">
-      <p class="mono mb-4">Live preview</p>
-      <p class="body-lg max-w-md">A real short on loop. The frame is 9:16. The safe area is honored. The first second does the work.</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      {reels.map((src) => (
+        <div class="relative w-full aspect-[9/16] rounded-[2px] border border-border bg-black overflow-hidden">
+          <video
+            src={src}
+            playsinline controls preload="metadata"
+            controlslist="nodownload"
+            class="absolute inset-0 w-full h-full object-cover"
+          ></video>
+        </div>
+      ))}
     </div>
   </div>
 </ServiceLayout>

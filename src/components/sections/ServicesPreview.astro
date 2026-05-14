@@ -5,6 +5,8 @@ interface Service {
   mono: string;
   desc: string;
   tags: string[];
+  /** Imported video URL (mp4) used as the card's hover-play background. */
+  video: string;
 }
 interface Props {
   label?: string;
@@ -12,8 +14,6 @@ interface Props {
   services: Service[];
 }
 const { label = 'What we do', caption = 'Three services', services } = Astro.props;
-
-const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 ---
 <section class="container-l py-32 md:py-40">
   <div class="flex items-baseline justify-between mb-16">
@@ -32,12 +32,11 @@ const slugify = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
         <video
           x-ref="v"
           x-effect="hovering ? $refs.v?.play() : $refs.v?.pause()"
-          muted loop playsinline preload="none"
+          muted loop playsinline preload="metadata"
           class="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-500"
           x-bind:class="hovering ? 'opacity-70' : 'opacity-40'"
-          poster={`/posters/${slugify(s.label)}.jpg`}
         >
-          <source src={`/reels/${slugify(s.label)}.mp4`} type="video/mp4" />
+          <source src={s.video} type="video/mp4" />
         </video>
         <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
         <div class="relative h-full flex flex-col justify-between p-6 md:p-10">
