@@ -27,7 +27,7 @@ const spanClass = {
     if (!v) return;
     if (hovering) { v.play().catch(()=>{}); } else { v.pause(); v.currentTime = 0; }
   "
-  class:list={["group relative overflow-hidden rounded-[2px] bg-[var(--surface)] border border-[var(--border)]", spanClass]}
+  class:list={["group relative overflow-hidden rounded-[2px] bg-surface border border-border", spanClass]}
 >
   <a href={`/work/${work.id}`} class="block" transition:name={`work-${work.id}`}>
     <div class:list={["relative overflow-hidden", aspectClass]}>
@@ -52,14 +52,14 @@ const spanClass = {
         ></video>
       )}
       <!-- progress bar -->
-      <div class="absolute left-0 right-0 bottom-0 h-px bg-[var(--accent)] origin-left transition-transform duration-[1200ms]"
+      <div class="absolute left-0 right-0 bottom-0 h-px bg-accent origin-left transition-transform duration-[1200ms]"
            :class="hovering ? 'scale-x-100' : 'scale-x-0'"></div>
       <!-- metadata reveal -->
       <div
         class="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300"
         :class="hovering ? 'opacity-100' : 'opacity-0'"
       >
-        <p class="mono text-[var(--text-primary)]/80">{d.client} · {d.year} · {d.serviceLabel}{d.runtime ? ' · ' + d.runtime : ''}</p>
+        <p class="mono text-fg/80">{d.client} · {d.year} · {d.serviceLabel}{d.runtime ? ' · ' + d.runtime : ''}</p>
       </div>
     </div>
     <div class="p-5 flex items-baseline justify-between">
@@ -67,7 +67,7 @@ const spanClass = {
         <h3 class="font-display text-lg md:text-xl">{d.title}</h3>
         <p class="mono mt-1">{d.client} · {d.year}</p>
       </div>
-      <span class="mono opacity-70 group-hover:opacity-100 group-hover:text-[var(--accent)] transition">→</span>
+      <span class="mono opacity-70 group-hover:opacity-100 group-hover:text-accent transition">→</span>
     </div>
   </a>
 </article>

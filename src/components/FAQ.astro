@@ -2,9 +2,9 @@
 interface Props { items: { q: string; a: string }[] }
 const { items } = Astro.props;
 ---
-<div x-data="{ open: null }" class="border-t border-[var(--border)]">
+<div x-data="{ open: null }" class="border-t border-border">
   {items.map((item, i) => (
-    <div class="border-b border-[var(--border)]">
+    <div class="border-b border-border">
       <button
         @click={`open = open === ${i} ? null : ${i}`}
         :aria-expanded={`open === ${i}`}
@@ -12,12 +12,12 @@ const { items } = Astro.props;
         class="w-full text-left py-6 flex items-baseline justify-between gap-6 group"
       >
         <span class="font-display text-xl md:text-2xl pr-4">{item.q}</span>
-        <span class="mono shrink-0" :class={`open === ${i} ? 'text-[var(--accent)]' : ''`}>
+        <span class="mono shrink-0" :class={`open === ${i} ? 'text-accent' : ''`}>
           <span x-text={`open === ${i} ? '—' : '+'`}>+</span>
         </span>
       </button>
       <div id={`faq-${i}`} x-show={`open === ${i}`} x-collapse x-cloak>
-        <p class="pb-6 pr-8 text-[var(--text-secondary)] leading-relaxed max-w-2xl">{item.a}</p>
+        <p class="pb-6 pr-8 text-fg-muted leading-relaxed max-w-2xl">{item.a}</p>
       </div>
     </div>
   ))}

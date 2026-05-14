@@ -53,8 +53,7 @@ const altHeadlines = [
     <h1 class="relative z-10 max-w-5xl" x-data="{ shown: false }" x-intersect.once="shown = true">
       <span class="block overflow-hidden">
         <span
-          class="block font-sans font-semibold text-white tracking-tight transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)]"
-          style="font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1.05; letter-spacing: -0.02em;"
+          class="block font-sans font-semibold text-white text-hero transition-transform duration-700 ease-cinematic"
           :class="shown ? 'translate-y-0' : 'translate-y-full'"
         >
           From messy to catchy. In 72 hours.
@@ -62,8 +61,7 @@ const altHeadlines = [
       </span>
       <span class="block overflow-hidden mt-3 md:mt-4">
         <span
-          class="block font-display italic text-[var(--accent)] transition-transform duration-700 delay-150 ease-[cubic-bezier(0.65,0,0.35,1)]"
-          style="font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1.0; letter-spacing: -0.03em;"
+          class="block font-display italic text-accent text-hero transition-transform duration-700 delay-150 ease-cinematic"
           :class="shown ? 'translate-y-0' : 'translate-y-full'"
         >
           You shoot. We cut. <br /> The internet erupts.
@@ -73,7 +71,7 @@ const altHeadlines = [
 
     <!-- Subheading -->
     <p
-      class="relative z-10 body-lg max-w-xl mt-10 text-[var(--text-secondary)]"
+      class="relative z-10 body-lg max-w-xl mt-10 text-fg-muted"
       x-data="{ shown: false }"
       x-intersect.once="shown = true"
       :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'"
@@ -168,7 +166,7 @@ const altHeadlines = [
           x-data="{ hovering: false }"
           x-on:mouseenter="hovering = true"
           x-on:mouseleave="hovering = false"
-          class="group relative block min-h-[60vh] lg:min-h-[80vh] rounded-xs border border-(--border) overflow-hidden bg-[var(--bg-elevated)]"
+          class="group relative block min-h-[60vh] lg:min-h-[80vh] rounded-xs border border-(--border) overflow-hidden  bg-bg-elevated"
         >
           <video
             x-ref="v"
@@ -180,7 +178,7 @@ const altHeadlines = [
           >
             <source src={`/reels/${s.label.toLowerCase().replace(' ','-')}.mp4`} type="video/mp4" />
           </video>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
           <div class="relative h-full flex flex-col justify-between p-6 md:p-10">
             <p class="mono">{s.mono}</p>
             <div>
@@ -238,10 +236,10 @@ const altHeadlines = [
     </div>
     <div class="grid md:grid-cols-3 gap-x-8 gap-y-12">
       {process.map((s) => (
-        <div class="border-t border-[var(--border)] pt-8">
-          <p class="mono text-[var(--accent)] mb-6">{s.num}</p>
+        <div class="border-t border-border pt-8">
+          <p class="mono text-accent mb-6">{s.num}</p>
           <h3 class="display-h2 mb-4">{s.title}</h3>
-          <p class="text-[var(--text-secondary)] leading-relaxed">{s.copy}</p>
+          <p class="text-fg-muted leading-relaxed">{s.copy}</p>
         </div>
       ))}
     </div>
@@ -257,7 +255,7 @@ const altHeadlines = [
         { q: 'Our retention curve went from a cliff to a slope. Whatever they did in the first eight seconds — keep doing that.', name: 'Mei Tanaka', role: 'Head of Content, Greylight', mark: '“' },
       ].map((t) => (
         <figure class="relative max-w-4xl">
-          <span aria-hidden="true" class="absolute -top-12 -left-4 font-display text-[12rem] leading-none text-[var(--accent-soft)] pointer-events-none select-none">{t.mark}</span>
+          <span aria-hidden="true" class="absolute -top-12 -left-4 font-display text-[12rem] leading-none text-accent-soft pointer-events-none select-none">{t.mark}</span>
           <blockquote class="relative font-display text-2xl md:text-4xl leading-tight tracking-tight">
             {t.q}
           </blockquote>
@@ -270,9 +268,10 @@ const altHeadlines = [
   <!-- FINAL CTA -->
   <section class="container-l py-32 md:py-48 text-center">
     <h2 class="display-hero">Ready when you are.</h2>
-    <a href="mailto:medialumero@gmail.com" class="mono link-underline text-[var(--accent)] mt-12 inline-block">medialumero@gmail.com →</a>
+    <a href="mailto:medialumero@gmail.com" class="mono link-underline text-accent mt-12 inline-block">medialumero@gmail.com →</a>
   </section>
 </BaseLayout>
+
 <style>
   .hero {
     background:
@@ -302,39 +301,6 @@ const altHeadlines = [
   }
   @media (prefers-reduced-motion: reduce) {
     .star { animation: none; opacity: 0.55; }
-  }
-
-  /* Buttons */
-  :global(.btn-primary) {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.85rem 1.5rem;
-    background: var(--moonlight);
-    color: var(--bg);
-    font-weight: 600;
-    font-size: 0.95rem;
-    border-radius: 999px;
-    transition: transform 200ms var(--ease-cinematic), box-shadow 200ms var(--ease-cinematic), filter 200ms var(--ease-cinematic);
-    box-shadow: 0 10px 30px -10px rgba(180, 210, 255, 0.5);
-  }
-  :global(.btn-primary:hover) {
-    transform: translateY(-1px);
-    filter: brightness(1.05);
-    box-shadow: 0 14px 40px -10px rgba(180, 210, 255, 0.75);
-  }
-  :global(.btn-secondary) {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.85rem 1.5rem;
-    background: var(--surface);
-    color: var(--text-primary);
-    font-weight: 500;
-    font-size: 0.95rem;
-    border-radius: 999px;
-    border: 1px solid var(--border-strong);
-    transition: background 200ms var(--ease-cinematic), border-color 200ms var(--ease-cinematic);
-  }
-  :global(.btn-secondary:hover) {
-    background: var(--surface-hover);
-    border-color: var(--accent);
   }
 
   /* Round crescent moon — sits below the CTAs, horns pointing up, cradling the buttons. */

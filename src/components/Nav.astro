@@ -13,7 +13,7 @@ const links = [
 <header
   x-data="{ scrolled: false }"
   x-init="scrolled = window.scrollY > 8; window.addEventListener('scroll', () => scrolled = window.scrollY > 8, { passive: true })"
-  :class="scrolled ? 'border-b border-[var(--border)] bg-[color-mix(in_oklab,var(--bg)_85%,transparent)] backdrop-blur-md' : 'border-b border-transparent'"
+  :class="scrolled ? 'border-b border-border bg-[color-mix(in_oklab,var(--bg)_85%,transparent)] backdrop-blur-md' : 'border-b border-transparent'"
   class="fixed inset-x-0 top-0 z-50 transition-colors duration-200"
 >
   <nav class="container-l flex items-center justify-between h-16 md:h-20">
@@ -25,10 +25,10 @@ const links = [
         <li>
           <a
             href={l.href}
-            class:list={["mono link-underline relative", l.active && 'text-[var(--accent)]']}
+            class:list={["mono link-underline relative", l.active && 'text-accent']}
           >
             {l.label}
-            {l.active && <span class="absolute -bottom-1 left-0 right-0 h-px bg-[var(--accent)]"></span>}
+            {l.active && <span class="absolute -bottom-1 left-0 right-0 h-px bg-accent"></span>}
           </a>
         </li>
       ))}

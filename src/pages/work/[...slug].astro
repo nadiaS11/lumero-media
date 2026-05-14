@@ -25,7 +25,7 @@ const d = entry.data;
         ) : (
           <img src={d.poster} alt={d.title} class="absolute inset-0 w-full h-full object-cover" />
         )}
-        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg)] to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-bg to-transparent"></div>
       </div>
     </section>
 
@@ -34,7 +34,7 @@ const d = entry.data;
       <div class="md:col-span-8">
         <p class="mono mb-6">{d.serviceLabel} · {d.year}</p>
         <h1 class="display-h1">{d.title}</h1>
-        <p class="mono mt-4 text-[var(--text-secondary)]">{d.client}</p>
+        <p class="mono mt-4 text-fg-muted">{d.client}</p>
       </div>
       <aside class="md:col-span-4 md:pt-2 space-y-6">
         <div>
@@ -58,7 +58,7 @@ const d = entry.data;
 
     <!-- Body -->
     <section class="container-l pb-16 md:pb-24 grid md:grid-cols-12 gap-8">
-      <div class="md:col-span-8 md:col-start-3 prose-content text-[var(--text-secondary)] body-lg space-y-6">
+      <div class="md:col-span-8 md:col-start-3 prose-content text-fg-muted body-lg space-y-6">
         <Content />
       </div>
     </section>
@@ -72,7 +72,7 @@ const d = entry.data;
 
     {d.outcome && (
       <section class="container-l pb-24">
-        <div class="border-t border-[var(--border)] pt-10">
+        <div class="border-t border-border pt-10">
           <p class="mono mb-3">Outcome</p>
           <p class="display-h2 max-w-3xl">{d.outcome}</p>
         </div>
@@ -81,9 +81,9 @@ const d = entry.data;
 
     <!-- Next -->
     <section class="container-l pb-32">
-      <a href={`/work/${next.id}`} class="block group border-t border-[var(--border)] pt-10">
+      <a href={`/work/${next.id}`} class="block group border-t border-border pt-10">
         <p class="mono mb-3">Next project →</p>
-        <h2 class="display-h1 group-hover:text-[var(--accent)] transition-colors">{next.data.title}</h2>
+        <h2 class="display-h1 group-hover:text-accent transition-colors">{next.data.title}</h2>
         <p class="mono mt-3">{next.data.client} · {next.data.serviceLabel}</p>
       </a>
     </section>

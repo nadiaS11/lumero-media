@@ -3,7 +3,7 @@ interface Props { items: string[]; caption?: string }
 const { items, caption } = Astro.props;
 const doubled = [...items, ...items];
 ---
-<section class="py-20 border-y border-[var(--border)] overflow-hidden">
+<section class="py-20 border-y border-border overflow-hidden">
   {caption && <p class="mono container-l mb-8">{caption}</p>}
   <div
     x-data="{}"
@@ -13,7 +13,7 @@ const doubled = [...items, ...items];
   >
     <div class="marquee-track flex gap-16 w-max whitespace-nowrap">
       {doubled.map((name) => (
-        <span class="font-display text-3xl md:text-5xl text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+        <span class="font-display text-3xl md:text-5xl text-fg-dim hover:text-fg transition-colors">
           {name}
         </span>
       ))}

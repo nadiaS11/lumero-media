@@ -1,8 +1,9 @@
 ---
-import '../styles/global.css';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import { ClientRouter } from 'astro:transitions';
+import "../styles/global.css";
+import { Font } from "astro:assets";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -12,14 +13,18 @@ interface Props {
 }
 
 const {
-  title = 'Lumero Media — Post-production studio',
-  description = 'A boutique post-production studio cutting short-form, long-form, and faceless video for clients worldwide.',
-  ogImage = '/og-default.jpg',
+  title = "Lumero Media — Post-production studio",
+  description = "A boutique post-production studio cutting short-form, long-form, and faceless video for clients worldwide.",
+  ogImage = "/og-default.jpg",
   intro = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://lumeromedia.com').toString();
+const canonical = new URL(
+  Astro.url.pathname,
+  Astro.site ?? "https://lumeromedia.com",
+).toString();
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,6 +32,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://lumeromedia
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--astro-font-instrument" preload />
+    <Font cssVariable="--astro-font-inter-tight" preload />
+    <Font cssVariable="--astro-font-jetbrains" />
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -37,37 +45,37 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://lumeromedia
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#060A1C" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+   
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Lumero Media",
+        url: "https://lumeromedia.com",
+        email: "medialumero@gmail.com",
+        address: { "@type": "PostalAddress", addressCountry: "BD" },
+        sameAs: [],
+      })}
     />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Lumero Media',
-      url: 'https://lumeromedia.com',
-      email: 'medialumero@gmail.com',
-      address: { '@type': 'PostalAddress', addressCountry: 'BD' },
-      sameAs: [],
-    })} />
     <ClientRouter />
   </head>
   <body>
-    {intro && (
-      <div
-        x-data={`{ play: !sessionStorage.getItem('introPlayed') }`}
-        x-init="if (play) { sessionStorage.setItem('introPlayed','1'); setTimeout(() => play = false, 850) }"
-        x-show="play"
-        x-cloak
-        class="fixed inset-0 z-[100] pointer-events-none"
-        aria-hidden="true"
-      >
-        <div class="absolute inset-x-0 top-0 h-1/2 bg-[var(--bg)] letterbox-top"></div>
-        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-[var(--bg)] letterbox-bottom"></div>
-      </div>
-    )}
+    {
+      intro && (
+        <div
+          x-data={`{ play: !sessionStorage.getItem('introPlayed') }`}
+          x-init="if (play) { sessionStorage.setItem('introPlayed','1'); setTimeout(() => play = false, 850) }"
+          x-show="play"
+          x-cloak
+          class="fixed inset-0 z-[100] pointer-events-none"
+          aria-hidden="true"
+        >
+          <div class="absolute inset-x-0 top-0 h-1/2 bg-bg letterbox-top" />
+          <div class="absolute inset-x-0 bottom-0 h-1/2 bg-bg letterbox-bottom" />
+        </div>
+      )
+    }
 
     <Nav />
     <main id="main">
@@ -76,7 +84,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://lumeromedia
     <Footer />
 
     <style is:global>
-      [x-cloak] { display: none !important; }
+      [x-cloak] {
+        display: none !important;
+      }
     </style>
   </body>
 </html>

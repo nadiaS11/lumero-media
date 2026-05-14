@@ -37,10 +37,10 @@ const { src, poster, caption } = Astro.props;
     <div
       x-ref="bar"
       @click="seek($event)"
-      class="h-px w-full bg-[var(--border-strong)] cursor-pointer mb-4 group"
+      class="h-px w-full bg-border-strong cursor-pointer mb-4 group"
       role="slider" aria-label="Scrubber"
     >
-      <div class="h-px bg-[var(--accent)]" :style="`width: ${progress}%`"></div>
+      <div class="h-px bg-accent" :style="`width: ${progress}%`"></div>
     </div>
     <div class="flex items-center justify-between gap-4">
       <div class="flex items-center gap-4">

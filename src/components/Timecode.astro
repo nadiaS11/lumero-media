@@ -20,7 +20,7 @@ const { class: cls = '' } = Astro.props;
     }
   }"
   x-init="start()"
-  class:list={["font-mono text-xs tracking-widest text-[var(--text-secondary)]", cls]}
+  class:list={["font-mono text-xs tracking-widest text-fg-muted", cls]}
   aria-label="Session timecode"
 >
   <span x-text="pad(h)+':'+pad(m)+':'+pad(s)+':'+pad(f)">00:00:00:00</span>
