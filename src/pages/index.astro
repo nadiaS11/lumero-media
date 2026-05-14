@@ -3,9 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import ServicesPreview from '../components/sections/ServicesPreview.astro';
 import Reel from '../components/sections/Reel.astro';
-import ClientsSection from '../components/sections/ClientsSection.astro';
 import Process from '../components/sections/Process.astro';
-import Testimonials from '../components/sections/Testimonials.astro';
 import FinalCta from '../components/sections/FinalCta.astro';
 
 // Videos — imported so Vite fingerprints and serves them; source files live in /assets and are gitignored.
@@ -20,35 +18,25 @@ const services = [
   { slug: '/faceless', label: 'Faceless', mono: '03 · FACELESS YOUTUBE', desc: 'High-volume faceless content actually edited — B-roll, motion, kinetic type — built to read as premium.', tags: ['B-roll', 'Motion', 'Type'], video: facelessCard },
 ];
 
-const clients = ['Northwind', 'Atlas Daily', 'Vela', 'Meridian Films', 'Halcyon', 'Greylight', 'Compass & Co.', 'Riverbend Studios'];
-
 const process = [
   { num: '01', title: 'Brief', copy: 'Tight intake call. We pin the audience, the format, the tone, and the deliverables before a single clip lands on the timeline.' },
   { num: '02', title: 'Edit', copy: 'First assembly within days. We send a private review link with frame-accurate comment threading. You stay in the loop.' },
   { num: '03', title: 'Refine', copy: 'Two rounds of revisions included. Color, sound, captions, masters. We deliver in whatever spec your destination needs.' },
 ];
-
-const testimonials = [
-  { q: 'They cut our brand film like it was theirs. The pacing decisions alone were worth the engagement.', name: 'Iris Halberstam', role: 'Director, Northwind Studios' },
-  { q: 'Three months of weekly faceless drops, never a missed beat. The B-roll work is sharper than the channels three times their size.', name: 'Daniel Okafor', role: 'Founder, Atlas Daily' },
-  { q: 'Our retention curve went from a cliff to a slope. Whatever they did in the first eight seconds — keep doing that.', name: 'Mei Tanaka', role: 'Head of Content, Greylight' },
-];
 ---
 <BaseLayout intro={true} title="Lumero Media — Post-production studio">
   <Hero />
-  <ServicesPreview services={services} />
   <Reel
     id="work"
     heading="Lumero Reel — 2026"
     meta="Runtime · 02:14"
     src={showReel}
   />
-  <ClientsSection items={clients} caption="Trusted by · 2022 – Present" />
+  <ServicesPreview services={services} />
   <Process
     label="How we work"
     headline="Three steps,<br/>no theatre."
     items={process}
   />
-  <Testimonials items={testimonials} />
   <FinalCta heading="Ready when you are." />
 </BaseLayout>

@@ -41,13 +41,16 @@ const { label = 'What we do', caption = 'Three services', services } = Astro.pro
         <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
         <div class="relative h-full flex flex-col justify-between p-6 md:p-10">
           <p class="mono">{s.mono}</p>
-          <div>
-            <h3 class="display-h1 mb-4">{s.label}</h3>
-            <p class="body-lg max-w-md mb-8">{s.desc}</p>
+          <div class="flex flex-col gap-6">
+            <h3 class="display-h1">{s.label}</h3>
+            <p class="body-lg max-w-md">{s.desc}</p>
             <div class="flex items-center justify-between">
               <div class="flex gap-2">
                 {s.tags.map((t) => <span class="btn-pill">{t}</span>)}
               </div>
+             </div>
+            <div class="flex items-center justify-center">
+             
               <span class="mono group-hover:text-accent transition">View service →</span>
             </div>
           </div>

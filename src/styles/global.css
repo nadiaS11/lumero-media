@@ -5,6 +5,9 @@
 
   --font-manrope:
     var(--astro-font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-manrope);
 
   /* Colors — clean utility names (text-accent, bg-surface, border-border, text-fg, text-fg-muted, ...) */
   --color-bg: #060a1c;
@@ -101,8 +104,11 @@
   h3,
   h4 {
     font-family: var(--font-manrope);
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: -0.03em;
+  }
+  body {
+    font-weight: 400;
   }
 }
 
@@ -115,31 +121,32 @@
   }
   .mono {
     font-family: var(--font-manrope);
+    font-weight: 500;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-secondary);
   }
   .display-hero {
     font-family: var(--font-manrope);
-    font-weight: 400;
+    font-weight: 800;
     font-size: clamp(3.5rem, 10vw, 9rem);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.045em;
   }
   .display-h1 {
     font-family: var(--font-manrope);
-    font-weight: 400;
+    font-weight: 700;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
   .display-h2 {
     font-family: var(--font-manrope);
-    font-weight: 400;
+    font-weight: 700;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
   .body-lg {
     font-size: 1.125rem;
@@ -158,8 +165,9 @@
     border: 1px solid var(--border-strong);
     border-radius: 999px;
     font-family: var(--font-manrope);
+    font-weight: 500;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     transition:
       background var(--dur-micro) var(--ease-cinematic),
